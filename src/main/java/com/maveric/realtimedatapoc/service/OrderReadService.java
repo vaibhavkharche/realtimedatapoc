@@ -36,6 +36,6 @@ public class OrderReadService {
                 Thread.currentThread().interrupt();
                 logger.error("Unable to read csv file, Exception: ", e);
             }
-        }, new Date(System.currentTimeMillis() + 10000));
+        }, new Date(System.currentTimeMillis() + 20000));
     }
 }

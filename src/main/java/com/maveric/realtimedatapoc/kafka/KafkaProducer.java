@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class KafkaProducer {
@@ -32,7 +31,7 @@ public class KafkaProducer {
 
     public void publishOrderAsKafkaMessage(Order order) {
         logger.info("publishing message to topic: {}, message: {}", kafkaTopic, order);
-        ProducerRecord<String, Order> producerRecord = new ProducerRecord<>(kafkaTopic, "Key-" + ThreadLocalRandom.current().nextInt(0, 5), order);
+        ProducerRecord<String, Order> producerRecord = new ProducerRecord<>(kafkaTopic, order.getTerritory(), order);
         CompletableFuture<SendResult<String, Order>> completableFuture = kafkaTemplate.send(producerRecord);
         try {
             SendResult<String, Order> sendResult = completableFuture.get();

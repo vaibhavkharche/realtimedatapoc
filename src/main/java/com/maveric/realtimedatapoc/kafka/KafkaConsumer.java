@@ -21,6 +21,7 @@ public class KafkaConsumer {
         logger.info("Received message: {}", order);
         try {
             orderService.saveOrder(order);
+            logger.info("Order saved successfully to database with id: {}", order.getId());
         } catch (Exception e) {
             logger.error("Enable to save order, Exception: ", e);
         }
